@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<meta charset="UTF-8"/>
+<title>Same Origin Policy - Web Security</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Same_Origin_Policy","wgTitle":"Same Origin Policy","wgCurRevisionId":265,"wgRevisionId":265,"wgArticleId":96,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Same_Origin_Policy","wgRelevantArticleId":96,"wgRequestId":"c8886bcfae208acb988072b6","wgIsProbablyEditable":false,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"preview":true,"publish":false},"wgPreferredVariant":"en"});mw.loader.implement("user.options",function($,jQuery,require,module){mw.user.options.set({"variant":"en"});});mw.loader.implement("user.tokens",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/;
+
+});mw.loader.load(["mediawiki.page.startup","ext.smw.style","skins.vector.js"]);});</script>
+<link rel="stylesheet" href="/Security/wiki/load.php?debug=false&amp;lang=en&amp;modules=ext.smw.style%7Cext.smw.tooltip.styles&amp;only=styles&amp;skin=vector"/>
+<link rel="stylesheet" href="/Security/wiki/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles&amp;only=styles&amp;skin=vector"/>
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<script async="" src="/Security/wiki/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta name="generator" content="MediaWiki 1.27.4"/>
+<link rel="ExportRDF" type="application/rdf+xml" title="Same Origin Policy" href="/Security/wiki/index.php?title=Special:ExportRDF/Same_Origin_Policy&amp;xmlmime=rdf"/>
+<link rel="shortcut icon" href="/favicon.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/Security/wiki/opensearch_desc.php" title="Web Security (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="https://www.w3.org/Security/wiki/api.php?action=rsd"/>
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Same_Origin_Policy rootpage-Same_Origin_Policy skin-vector action-view">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+						<div class="mw-indicators">
+</div>
+			<h1 id="firstHeading" class="firstHeading" lang="en">Same Origin Policy</h1>
+									<div id="bodyContent" class="mw-body-content">
+									<div id="siteSub">From Web Security</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="#mw-head">navigation</a>, 					<a href="#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Same-Origin_Policy"><span class="tocnumber">1</span> <span class="toctext">Same-Origin Policy</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#General_Principles"><span class="tocnumber">2</span> <span class="toctext">General Principles</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Network_Access"><span class="tocnumber">3</span> <span class="toctext">Network Access</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Details"><span class="tocnumber">3.1</span> <span class="toctext">Details</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Exceptions"><span class="tocnumber">3.2</span> <span class="toctext">Exceptions</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="#Relevant_specifications"><span class="tocnumber">4</span> <span class="toctext">Relevant specifications</span></a></li>
+</ul>
+</div>
+
+<h1><span class="mw-headline" id="Same-Origin_Policy">Same-Origin Policy</span></h1>
+<p>There is no single same-origin policy.
+</p>
+<h1><span class="mw-headline" id="General_Principles">General Principles</span></h1>
+<p>An origin is defined by the scheme, host, and port of a URL.  Generally speaking, documents retrieved from distinct origins are isolated from each other.  For example, if a document retrieved from <a rel="nofollow" class="external free" href="http://example.com/doc.html">http://example.com/doc.html</a> tries to access the DOM of a document retrieved from <a rel="nofollow" class="external free" href="https://example.com/target.html">https://example.com/target.html</a>, the user agent will disallow access because the origin of the first document, (http, example.com, 80), does not match the origin of the second document (https, example.com, 443).
+</p><p>Although the same-origin policy differs between APIs, the overarching intent is to let users visit untrusted web sites without those web sites interfering with the user's session with honest web sites.
+</p>
+<h1><span class="mw-headline" id="Network_Access">Network Access</span></h1>
+<p>For networking APIs, the same-origin policy distinguishes between sending and receiving information.  Broadly, one origin is permitted to send information to another origin, but one origin is not permitted to receive information from another origin.  The prohibition on receiving information is intended to prevent malicious web sites from reading confidential information from other web sites, but also prevents web content from legitimately reading information offered by other web sites.
+</p><p>Under the same-origin policy, cross-site sending of information is also dangerous since it enables attacks such as cross-site request forgery (CSRF) and clickjacking. The same-origin policy cannot address these security vulnerabilities in the same way it does those around receiving of information since prohibiting cross-site sending of information would prohibit cross-site hyperlinks.  Without "allow sending," there would be no "web" at all because each origin would be allowed to link only to itself.
+</p><p>Since the same-origin policy creates, or wants to create, blanket prohibitions on web-like features of sending and receiving information, it may not be a good fit for the access control needs of a web. Nevertheless, the same-origin policy has been applied to the Web and many Web resources now rely upon it. This section documents the same-origin policy networking restrictions that Web resources may rely upon.
+</p>
+<h2><span class="mw-headline" id="Details">Details</span></h2>
+<p>The same-origin policy restricts which network messages one origin can send to another.  For example, the same-origin policy allows inter-origin HTTP requests with GET and POST methods but denies inter-origin PUT and DELETE requests.  Additionally, origins can use custom HTTP headers when sending requests to themselves but cannot use custom headers when sending requests to other origins.
+</p><p>The restrictions on reading information received from other origins is also somewhat subtle.  For example, the HTML <code>&lt;script&gt;</code> element can execute content retrieved from foreign origins, which means web sites should not rely on the same-origin policy to protect the confidentiality of information in a format that happens to parse as script (e.g., JavaScript source files, JSON format, JSONP services, or <a rel="nofollow" class="external text" href="http://www.thinkfu.com/blog/?p=15">JavaScript/gif polyglots</a>). For all such resources, no loss of security would result (and much flexibility would be gained) from adding the <code>Access-Control-Allow-Origin:*</code> header to all responses.
+</p>
+<h2><span class="mw-headline" id="Exceptions">Exceptions</span></h2>
+<p>TODO: Discuss how CORS and UMP lets web sites opt out of these restrictions.
+</p>
+<h1><span class="mw-headline" id="Relevant_specifications">Relevant specifications</span></h1>
+<ul><li> <a href="/Security/wiki/HTML5" title="HTML5">HTML5</a></li>
+<li> <a href="/Security/wiki/XMLHttpRequest" title="XMLHttpRequest">XMLHttpRequest</a></li>
+<li> <a rel="nofollow" class="external text" href="http://tools.ietf.org/html/draft-abarth-origin-06">draft-abarth-origin</a></li></ul>
+<p>Relevant reference materials:
+</p>
+<ul><li> <a rel="nofollow" class="external text" href="http://code.google.com/p/browsersec/wiki/Part2#Same-origin_policy">Same origin policy</a> (<a rel="nofollow" class="external text" href="http://code.google.com/p/browsersec/wiki/Part2">Google Browser Security Handbook, Part 2</a>)</li>
+<li> <a rel="nofollow" class="external text" href="https://developer.mozilla.org/En/Same_origin_policy_for_JavaScript">Same origin policy for JavaScript</a> (Mozilla developer center)</li>
+<li> <a rel="nofollow" class="external text" href="http://www-archive.mozilla.org/projects/security/components/same-origin.html">The same origin policy</a> (archived Mozilla site as of April 21, 2008)</li>
+<li> <a rel="nofollow" class="external text" href="http://lists.w3.org/Archives/Public/ietf-http-wg/2009OctDec/0229.html">November 2009 mailing list thread on ietf-http-wg</a></li>
+<li> <a rel="nofollow" class="external text" href="http://powerofcommunity.net/poc2008/kuza55.pdf">Same Origin Policy Weaknesses by Stefano Di Paola, Alex `kuza55` K</a></li></ul>
+
+<!-- 
+NewPP limit report
+Cached time: 20190215022917
+Cache expiry: 86400
+Dynamic content: false
+[SMW] In‐text annotation parser time: 0 seconds
+CPU time usage: 0.008 seconds
+Real time usage: 0.015 seconds
+Preprocessor visited node count: 22/1000000
+Preprocessor generated node count: 28/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 - -total
+-->
+
+<!-- Saved in parser cache with key wikidb-security_:pcache:idhash:96-0!*!0!!en!*!* and timestamp 20190215022917 and revision id 265
+ -->
+</div>					<div class="printfooter">
+						Retrieved from "<a dir="ltr" href="https://www.w3.org/Security/wiki/index.php?title=Same_Origin_Policy&amp;oldid=265">https://www.w3.org/Security/wiki/index.php?title=Same_Origin_Policy&amp;oldid=265</a>"					</div>
+				<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+							<li id="pt-login"><a href="/Security/wiki/index.php?title=Special:UserLogin&amp;returnto=Same+Origin+Policy" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+															<li  id="ca-nstab-main" class="selected"><span><a href="/Security/wiki/Same_Origin_Policy"  title="View the content page [c]" accesskey="c">Page</a></span></li>
+															<li  id="ca-talk" class="new"><span><a href="/Security/wiki/index.php?title=Talk:Same_Origin_Policy&amp;action=edit&amp;redlink=1"  title="Discussion about the content page [t]" accesskey="t" rel="discussion">Discussion</a></span></li>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label">
+							<span>Variants</span><a href="#"></a>
+						</h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Views</h3>
+						<ul>
+															<li id="ca-view" class="selected"><span><a href="/Security/wiki/Same_Origin_Policy" >Read</a></span></li>
+															<li id="ca-viewsource"><span><a href="/Security/wiki/index.php?title=Same_Origin_Policy&amp;action=edit"  title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></span></li>
+															<li id="ca-history" class="collapsible"><span><a href="/Security/wiki/index.php?title=Same_Origin_Policy&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+													</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<h3 id="p-cactions-label"><span>More</span><a href="#"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Search</label>
+						</h3>
+
+						<form action="/Security/wiki/index.php" id="searchform">
+							<div id="simpleSearch">
+							<input type="search" name="search" placeholder="Search" title="Search Web Security [f]" accesskey="f" id="searchInput"/><input type="hidden" value="Special:Search" name="title"/><input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton mw-fallbackSearchButton"/><input type="submit" name="go" value="Go" title="Go to a page with this exact name if it exists" id="searchButton" class="searchButton"/>							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/Security/wiki/Main_Page"  title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id='p-navigation' aria-labelledby='p-navigation-label'>
+			<h3 id='p-navigation-label'>Navigation</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-mainpage-description"><a href="/Security/wiki/Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li><li id="n-recentchanges"><a href="/Security/wiki/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li><li id="n-randompage"><a href="/Security/wiki/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li><li id="n-help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" title="The place to find out">Help</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-tb' aria-labelledby='p-tb-label'>
+			<h3 id='p-tb-label'>Tools</h3>
+
+			<div class="body">
+									<ul>
+						<li id="t-whatlinkshere"><a href="/Security/wiki/Special:WhatLinksHere/Same_Origin_Policy" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li><li id="t-recentchangeslinked"><a href="/Security/wiki/Special:RecentChangesLinked/Same_Origin_Policy" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li><li id="t-specialpages"><a href="/Security/wiki/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li><li id="t-print"><a href="/Security/wiki/index.php?title=Same_Origin_Policy&amp;printable=yes" rel="alternate" title="Printable version of this page [p]" accesskey="p">Printable version</a></li><li id="t-permalink"><a href="/Security/wiki/index.php?title=Same_Origin_Policy&amp;oldid=265" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="/Security/wiki/index.php?title=Same_Origin_Policy&amp;action=info" title="More information about this page">Page information</a></li>					</ul>
+							</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 6 January 2010, at 19:19.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="/Security/wiki/Web_Security:Privacy_policy" title="Web Security:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/Security/wiki/Web_Security:About" title="Web Security:About">About Web Security</a></li>
+											<li id="footer-places-disclaimer"><a href="/Security/wiki/Web_Security:General_disclaimer" title="Web Security:General disclaimer">Disclaimers</a></li>
+											<li id="footer-places-mobileview"><a href="https://www.w3.org/Security/wiki/index.php?title=Same_Origin_Policy&amp;mobileaction=toggle_view_mobile" class="noprint stopMobileRedirectToggle">Mobile view</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-poweredbyico">
+							<a href="//www.mediawiki.org/"><img src="/Security/wiki/resources/assets/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/Security/wiki/resources/assets/poweredby_mediawiki_132x47.png 1.5x, /Security/wiki/resources/assets/poweredby_mediawiki_176x62.png 2x" width="88" height="31"/></a>						</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>(window.RLQ=window.RLQ||[]).push(function(){mw.loader.state({"user":"ready","user.groups":"ready"});mw.loader.load(["mediawiki.toc","mediawiki.action.view.postEdit","site","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest"]);});</script><script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":83});});</script>
+	</body>
+</html>
